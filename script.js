@@ -11,10 +11,17 @@ function computerPlay() {
 }
 
 // create a function for user to play a round of rock paper scissors
-const playerSelection = prompt('Choose either rock, paper, or scissors');
-const computerSelection = computerPlay();
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+  if (
+    playerSelection.toLowerCase() !== 'rock' &&
+    playerSelection.toLowerCase() !== 'paper' &&
+    playerSelection.toLowerCase() !== 'scissors'
+  ) {
+    console.log(`Error...You must enter rock, paper, or scissors`);
+  }
+  else if (
+    playerSelection.toLowerCase() === computerSelection.toLowerCase()
+  ) {
     console.log("It's a tie!");
     console.log(`Your score: ${userScore}`);
     console.log(`Computer's score: ${computerScore}`);
@@ -41,6 +48,28 @@ function playRound(playerSelection, computerSelection) {
     console.log(`Computer's score: ${computerScore}`);
   }
 }
-playRound(playerSelection, computerSelection);
 
-function game() {}
+// create function that plays a best of five and determines winner
+function game() {
+  for (i = 0; i < 5; i++) {
+    const computerSelection = computerPlay();
+    const playerSelection = prompt(
+      'Choose either rock, paper, or scissors'
+    );
+    playRound(playerSelection, computerSelection);
+  }
+  if (userScore > computerScore) {
+    console.log(`You win!!!`);
+    console.log(
+      `Final Score is User: ${userScore} Computer: ${computerScore}`
+    );
+  }
+  else {
+    console.log(`You win!!!`);
+    console.log(
+      `Final Score is User: ${userScore} Computer: ${computerScore}`
+    );
+  }
+}
+
+game();
