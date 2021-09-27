@@ -14,29 +14,26 @@ function computerPlay() {
 function playRound(playerSelection, computerSelection) {
   if (playerSelection == null) return;
   else if (
-    playerSelection.toLowerCase() !== 'rock' &&
-    playerSelection.toLowerCase() !== 'paper' &&
-    playerSelection.toLowerCase() !== 'scissors'
+    playerSelection !== 'rock' &&
+    playerSelection !== 'paper' &&
+    playerSelection !== 'scissors'
   ) {
     console.log(`Error...You must enter rock, paper, or scissors`);
   }
-  else if (
-    playerSelection.toLowerCase() === computerSelection.toLowerCase()
-  ) {
+  else if (playerSelection === computerSelection) {
     console.log("It's a tie!");
     console.log(`Your score: ${userScore}`);
     console.log(`Computer's score: ${computerScore}`);
   }
   else if (
-    (playerSelection.toLowerCase() === 'rock' &&
-      computerSelection.toLowerCase() === 'scissors') ||
-    (playerSelection.toLowerCase() === 'paper' &&
-      computerSelection.toLowerCase() === 'rock') ||
-    (playerSelection.toLowerCase() === 'scissors' &&
-      computerSelection.toLowerCase() === 'paper')
+    (playerSelection === 'rock' && computerSelection === 'scissors') ||
+    (playerSelection === 'paper' && computerSelection === 'rock') ||
+    (playerSelection === 'scissors' && computerSelection === 'paper')
   ) {
     userScore += 1;
-    console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+    console.log(
+      `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}`
+    );
     console.log(`Your score: ${userScore}`);
     console.log(`Computer's score: ${computerScore}`);
   }
@@ -50,30 +47,18 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// create function that plays a best of five and determines winner
-function game() {
-  const computerSelection = computerPlay();
-  const playerSelection = prompt('Choose either rock, paper, or scissors');
-  playRound(playerSelection, computerSelection);
-}
-if (userScore > computerScore) {
-  console.log(`You win!!!`);
-  console.log(
-    `Final Score is User: ${userScore} Computer: ${computerScore}`
-  );
-}
-else {
-  console.log(`You win!!!`);
-  console.log(
-    `Final Score is User: ${userScore} Computer: ${computerScore}`
-  );
-}
-
-game();
-
 // references for the buttons
-const rockBtn = document.getElementById('rock');
-const paperBtn = document.getElementById('paper');
-const scissorsBtn = document.getElementById('scissors');
+const buttons = document.querySelectorAll('button');
 
-//
+// for each loop that adds event listener for each button
+// then takes the text of the button and uses it as a paramter for
+// calling playRound()
+buttons.forEach((button) => {
+  button.addEventListener('click', function(e) {
+    let playerSelection = e.target.textContent.toLowerCase();
+    let computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection);
+  });
+});
+
+// rockBtn.addEventListener('click', function(e) {});
