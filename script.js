@@ -12,7 +12,8 @@ function computerPlay() {
 
 // create a function for user to play a round of rock paper scissors
 function playRound(playerSelection, computerSelection) {
-  if (
+  if (playerSelection == null) return;
+  else if (
     playerSelection.toLowerCase() !== 'rock' &&
     playerSelection.toLowerCase() !== 'paper' &&
     playerSelection.toLowerCase() !== 'scissors'
