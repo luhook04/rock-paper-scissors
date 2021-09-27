@@ -52,25 +52,28 @@ function playRound(playerSelection, computerSelection) {
 
 // create function that plays a best of five and determines winner
 function game() {
-  for (i = 0; i < 5; i++) {
-    const computerSelection = computerPlay();
-    const playerSelection = prompt(
-      'Choose either rock, paper, or scissors'
-    );
-    playRound(playerSelection, computerSelection);
-  }
-  if (userScore > computerScore) {
-    console.log(`You win!!!`);
-    console.log(
-      `Final Score is User: ${userScore} Computer: ${computerScore}`
-    );
-  }
-  else {
-    console.log(`You win!!!`);
-    console.log(
-      `Final Score is User: ${userScore} Computer: ${computerScore}`
-    );
-  }
+  const computerSelection = computerPlay();
+  const playerSelection = prompt('Choose either rock, paper, or scissors');
+  playRound(playerSelection, computerSelection);
+}
+if (userScore > computerScore) {
+  console.log(`You win!!!`);
+  console.log(
+    `Final Score is User: ${userScore} Computer: ${computerScore}`
+  );
+}
+else {
+  console.log(`You win!!!`);
+  console.log(
+    `Final Score is User: ${userScore} Computer: ${computerScore}`
+  );
 }
 
 game();
+
+// references for the buttons
+const rockBtn = document.getElementById('rock');
+const paperBtn = document.getElementById('paper');
+const scissorsBtn = document.getElementById('scissors');
+
+//
