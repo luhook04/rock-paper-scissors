@@ -10,20 +10,19 @@ function computerPlay() {
   return playChoice[Math.floor(Math.random() * 3)];
 }
 
+let p = document.createElement('p');
+let div = document.querySelector('div');
 // create a function for user to play a round of rock paper scissors
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection == null) return;
-  else if (
-    playerSelection !== 'rock' &&
-    playerSelection !== 'paper' &&
-    playerSelection !== 'scissors'
-  ) {
-    console.log(`Error...You must enter rock, paper, or scissors`);
-  }
-  else if (playerSelection === computerSelection) {
-    console.log("It's a tie!");
-    console.log(`Your score: ${userScore}`);
-    console.log(`Computer's score: ${computerScore}`);
+  let message;
+  div.innerHTML = '';
+
+  if (playerSelection === computerSelection) {
+    message = `It's a tie!
+    Your score: ${userScore} 
+    Computer's score: ${computerScore}`;
+    p.textContent = message;
+    div.appendChild(p);
   }
   else if (
     (playerSelection === 'rock' && computerSelection === 'scissors') ||
@@ -31,20 +30,21 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === 'scissors' && computerSelection === 'paper')
   ) {
     userScore += 1;
-    console.log(
-      `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}`
-    );
-    console.log(`Your score: ${userScore}`);
-    console.log(`Computer's score: ${computerScore}`);
+    message = `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}
+    Your score: ${userScore}
+    Computer's score: ${computerScore}`;
+    p.textContent = message;
+    div.appendChild(p);
   }
   else {
     computerScore += 1;
-    console.log(
-      `You Lose! ${playerSelection.toUpperCase()} loses to ${computerSelection.toUpperCase()}`
-    );
-    console.log(`Your score: ${userScore}`);
-    console.log(`Computer's score: ${computerScore}`);
+    message = `You Lose! ${playerSelection.toUpperCase()} loses to ${computerSelection.toUpperCase()}
+    Your score: ${userScore}
+    Computer's score: ${computerScore}`;
+    p.textContent = message;
+    div.appendChild(p);
   }
+  checkWinner(userScore, computerScore);
 }
 
 // references for the buttons
@@ -61,4 +61,23 @@ buttons.forEach((button) => {
   });
 });
 
-// rockBtn.addEventListener('click', function(e) {});
+// function to check if someone has won the game
+function checkWinner(userScore, computerScore) {
+  if (userScore === 5) {
+    p.textContent = `CONGRATULATIONS!!! YOU WIN!!! Your score: ${userScore} Computer's Score: ${computerScore}`;
+    div.appendChild(p);
+    resetScore();
+  }
+  else if (computerScore === 5) {
+    p.textContent = `YOU LOSE! Your score: ${userScore} Computer's Score: ${computerScore}`;
+    div.appendChild(p);
+    resetScore();
+  }
+  else return;
+}
+
+// function to reset the score once someone wins
+function resetScore() {
+  userScore = 0;
+  computerScore = 0;
+}
